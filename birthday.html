@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Birthday Card</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        .card {
+            position: relative;
+            width: 80%;
+            height: 75vh;
+            border: 10px solid pink;
+            margin: 30px auto;
+            box-shadow: inset 10px 0px 15px 0px rgba(0, 0, 0, 0.1);
+            background-color: #e6f0e6;
+            perspective: 1000px;
+        }
+
+        .front,
+        .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .front {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            /* background-color: #1269eb; */
+            background-image: url("https://img.freepik.com/premium-vector/happy-birthday-banner-background-template-design_643087-1498.jpg");
+            background-size: cover;
+            transform: rotateY(0deg);
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .back {
+            position: relative;
+
+            transform: rotateY(180deg);
+            /* background-color: red; */
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* padding: 20px; */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .card.flipped .front {
+            transform: rotateY(180deg);
+        }
+
+        .card.flipped .back {
+            transform: rotateY(0deg);
+        }
+
+        /* Text container styling */
+        .text-container {
+            width: 90%;
+            height: 100%;
+            margin: auto;
+            padding: 0 !important;
+            color: #000;
+            text-align: center;
+            font-family: 'Nobile', sans-serif;
+            font-size: 1.5em;
+            /* line-height: 1.5; */
+        }
+
+        .back::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mans {
+            font-size: 1.0em;
+            font-weight: bold;
+            color: purple;
+        }
+
+        .pap {
+            margin-top: 10px;
+            font-size: 20px;
+            line-height: 1.4;
+            color: purple;
+            text-shadow: 4px 4px 20px pink;
+            font-style: italic;
+        }
+
+        @media (max-width:1000px) {
+            .pap {
+                font-size: 2.5rem;
+
+            }
+
+            .mans {
+                font-size: 2.0em;
+                font-weight: bolder;
+            }
+        }
+
+        /* Background video styling */
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+
+        /* Button styling */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #toggleButton {
+            padding: 10px 20px;
+            background-color: purple;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 22px;
+        }
+
+        @media (max-width: 600px) {
+
+            .front {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+                /* background-color: #1269eb; */
+                background-image: url("https://i.pinimg.com/736x/79/a2/ab/79a2ab7777027f5411ef3c8e010ec25a.jpg");
+                background-size: cover;
+                transform: rotateY(0deg);
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card" id="card">
+        <!-- Front side -->
+        <div class="front">
+            <div class="imgset">
+                <!-- <img width="100%" height="100%" src="./1d5d9ae4ac9995d6a5b8e1ed1450687f.jpg"> -->
+            </div>
+        </div>
+
+        <!-- Back side with video background -->
+        <div class="back">
+            <video class="background-video" autoplay loop muted playsinline>
+                <source src="https://cdn.imgpile.com/f/h5i3uow_lg.mp4" type="video/mp4">
+
+            </video>
+            <div class="text-container" id="bam">
+                <h6 class="mans">Happy Birthday to Someone Truly Special 🎉</h6>
+                <p class="pap">
+
+                    Today’s the day we celebrate you, the wonderful, caring, and family-oriented person who always
+                    manages to make life a little brighter and so much more meaningful! From your warm smile to your
+                    thoughtful ways, you bring so much love and good energy wherever you go.
+
+                    <br><br>
+                    <b>
+                        You’ve been such a blessing to this family, and it’s amazing how you always put everyone else
+                        first. Your kindness and strength inspire us all.
+
+                        On this special day, I hope you’re showered with all the joy, laughter, and love that you so
+                        generously give to others. You truly deserve every bit of happiness not just today, but every
+                        single day.
+
+                        Here’s to more cherished family moments and beautiful memories ahead. May your year be filled
+                        with endless blessings, and may you continue to be the incredible person we’re all so lucky to
+                        have.
+                    </b>
+                    <br><br>
+                    <b>Happy Birthday, BABY FUNMAL! 🎂🎈</b>
+                </p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button id="toggleButton">Open Card ❤</button>
+    </div>
+
+    <script>
+        document.getElementById('toggleButton').addEventListener('click', function () {
+            var card = document.querySelector('.card');
+            card.classList.toggle('flipped');
+
+            var button = document.getElementById('toggleButton');
+            if (card.classList.contains('flipped')) {
+                button.textContent = 'Close Card ❤❤';
+            } else {
+                button.textContent = 'Open Card ❤';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
